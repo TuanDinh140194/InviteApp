@@ -23,6 +23,8 @@ const event_images = [
     title: "Birthday Scavenger Hunt",
     time: "Thu, February 13 at 2:00PM",
     location: "Pioneer Park, CA",
+    desciption: "Hosting",
+
   },
   {
     id: 2,
@@ -30,6 +32,7 @@ const event_images = [
     title: "Beer Party",
     time: "Thu, February 13 at 2:00PM",
     location: "Portland, OR",
+    desciption: "Going",
   },
   {
     id: 3,
@@ -37,6 +40,7 @@ const event_images = [
     title: "Pickleball Games",
     time: "Thu, February 13 at 2:00PM",
     location: "Gresham, OR",
+    desciption: "Going",
   },
   {
     id: 4,
@@ -44,6 +48,7 @@ const event_images = [
     title: "Music Night",
     time: "Thu, February 13 at 2:00PM",
     location: "Salt Lake City, OR",
+    desciption: "Hosting",
   },
   {
     id: 5,
@@ -51,6 +56,7 @@ const event_images = [
     title: "Tyler turn 3",
     time: "Thu, February 13 at 2:00PM",
     location: "Redmond, WA",
+    desciption: "Hosting",
   },
   {
     id: 6,
@@ -58,6 +64,7 @@ const event_images = [
     title: "Housewarming Party",
     time: "Thu, February 13 at 2:00PM",
     location: "Seattle, WA",
+    desciption: "Going",
   },
   {
     id: 7,
@@ -65,6 +72,7 @@ const event_images = [
     title: "Reunion Party",
     time: "Thu, July 15 at 2:00PM",
     location: "HoChiMinh City, Vietnam",
+    desciption: "Hosting",
   },
   {
     id: 8,
@@ -72,6 +80,7 @@ const event_images = [
     title: "Tom and Megan's Wedding",
     time: "Thu, February 14 at 2:00PM",
     location: "Redmond, WA",
+    desciption: "Hosting",
   },
 ];
 

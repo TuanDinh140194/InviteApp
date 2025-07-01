@@ -1,5 +1,5 @@
 import { BlurView } from 'expo-blur';
-import { View, Text, Image, StyleSheet, Platform } from 'react-native';
+import { Text, Image, StyleSheet, Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Animated, { SharedValue, useAnimatedStyle, interpolate } from 'react-native-reanimated';
 import Foundation from 'react-native-vector-icons/Foundation';
@@ -47,13 +47,17 @@ export default function EventCard({
       className="overflow-hidden rounded-3xl">
       <Image source={image.url} className="h-full w-full flex-1" />
       <BlurView
-        className="absolute left-2 top-2 overflow-hidden rounded-2xl px-4 py-1 flex-row items-center gap-2"
+        className="absolute left-2 top-2 flex-row items-center gap-2 overflow-hidden rounded-2xl px-4 py-1"
         tint="dark"
         intensity={50}
         experimentalBlurMethod={Platform.OS === 'android' ? 'dimezisBlurView' : undefined}>
-        {/* <Foundation name="crown" color="white" size={18} /> */}
-        <AntDesign name="checkcircle" color="green" size={18} />
-        <Text className="text-md text-white">Hosting</Text>
+        {image.desciption === 'Going' ? (
+          <AntDesign name="checkcircle" color="green" size={18} />
+        ) : (
+          <Foundation name="crown" color="white" size={18} />
+        )}
+  
+        <Text className="text-md text-white">{image.desciption}</Text>
       </BlurView>
 
       <BlurView
