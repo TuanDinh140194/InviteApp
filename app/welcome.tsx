@@ -9,78 +9,78 @@ import Animated, {
   useAnimatedReaction,
   useSharedValue,
 } from 'react-native-reanimated';
+import { auth } from '../config/auth/firebaseConfig';
 import CreateEventButton from '~/components/AnimatedPressable';
 import EventCard from '~/components/EventCard';
 import { router } from 'expo-router';
 import { Marquee } from '@animatereactnative/marquee';
 import { Stagger } from '@animatereactnative/stagger';
-
+import { onAuthStateChanged } from 'firebase/auth';
 
 const event_images = [
   {
     id: 1,
     url: require('../assets/images/1.png'),
-    title: "Birthday Scavenger Hunt",
-    time: "Thu, February 13 at 2:00PM",
-    location: "Pioneer Park, CA",
-    desciption: "Hosting",
-
+    title: 'Birthday Scavenger Hunt',
+    time: 'Thu, February 13 at 2:00PM',
+    location: 'Pioneer Park, CA',
+    desciption: 'Hosting',
   },
   {
     id: 2,
     url: require('../assets/images/2.png'),
-    title: "Beer Party",
-    time: "Thu, February 13 at 2:00PM",
-    location: "Portland, OR",
-    desciption: "Going",
+    title: 'Beer Party',
+    time: 'Thu, February 13 at 2:00PM',
+    location: 'Portland, OR',
+    desciption: 'Going',
   },
   {
     id: 3,
     url: require('../assets/images/3.png'),
-    title: "Pickleball Games",
-    time: "Thu, February 13 at 2:00PM",
-    location: "Gresham, OR",
-    desciption: "Going",
+    title: 'Pickleball Games',
+    time: 'Thu, February 13 at 2:00PM',
+    location: 'Gresham, OR',
+    desciption: 'Going',
   },
   {
     id: 4,
     url: require('../assets/images/4.png'),
-    title: "Music Night",
-    time: "Thu, February 13 at 2:00PM",
-    location: "Salt Lake City, OR",
-    desciption: "Hosting",
+    title: 'Music Night',
+    time: 'Thu, February 13 at 2:00PM',
+    location: 'Salt Lake City, OR',
+    desciption: 'Hosting',
   },
   {
     id: 5,
     url: require('../assets/images/5.jpg'),
-    title: "Tyler turn 3",
-    time: "Thu, February 13 at 2:00PM",
-    location: "Redmond, WA",
-    desciption: "Hosting",
+    title: 'Tyler turn 3',
+    time: 'Thu, February 13 at 2:00PM',
+    location: 'Redmond, WA',
+    desciption: 'Hosting',
   },
   {
     id: 6,
     url: require('../assets/images/6.jpg'),
-    title: "Housewarming Party",
-    time: "Thu, February 13 at 2:00PM",
-    location: "Seattle, WA",
-    desciption: "Going",
+    title: 'Housewarming Party',
+    time: 'Thu, February 13 at 2:00PM',
+    location: 'Seattle, WA',
+    desciption: 'Going',
   },
   {
     id: 7,
     url: require('../assets/images/7.jpg'),
-    title: "Reunion Party",
-    time: "Thu, July 15 at 2:00PM",
-    location: "HoChiMinh City, Vietnam",
-    desciption: "Hosting",
+    title: 'Reunion Party',
+    time: 'Thu, July 15 at 2:00PM',
+    location: 'HoChiMinh City, Vietnam',
+    desciption: 'Hosting',
   },
   {
     id: 8,
     url: require('../assets/images/8.jpg'),
     title: "Tom and Megan's Wedding",
-    time: "Thu, February 14 at 2:00PM",
-    location: "Redmond, WA",
-    desciption: "Hosting",
+    time: 'Thu, February 14 at 2:00PM',
+    location: 'Redmond, WA',
+    desciption: 'Hosting',
   },
 ];
 
@@ -90,10 +90,17 @@ const _item_height = _item_width * 1.67;
 const _spacing = 16;
 const _itemSize = _item_width + _spacing;
 
-
 export default function WelcomeScreen() {
+
+  // Check if user is logged in
   const onPress = () => {
-    router.push('/create');
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        router.push('/profile'); // 🎉 user is logged in
+      } else {
+        router.push('/auth'); // 🔐 user needs to log in
+      }
+    });
   };
   const [activeIndex, setActiveIndex] = useState(0);
   const offset = useSharedValue(0);
@@ -134,7 +141,17 @@ export default function WelcomeScreen() {
             .easing(Easing.elastic(0.9))
             .withInitialValues({ transform: [{ translateY: -_item_height / 2 }] })}>
           {event_images.map((image, index) => (
-            <EventCard key={image.id} image={image} index={index} offset={offset} event_images={event_images} _itemSize={_itemSize} width={width} _item_width={_item_width} _item_height={_item_height} />
+            <EventCard
+              key={image.id}
+              image={image}
+              index={index}
+              offset={offset}
+              event_images={event_images}
+              _itemSize={_itemSize}
+              width={width}
+              _item_width={_item_width}
+              _item_height={_item_height}
+            />
           ))}
         </Animated.View>
       </Marquee>

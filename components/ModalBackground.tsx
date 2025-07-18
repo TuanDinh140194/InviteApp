@@ -2,6 +2,7 @@ import { View, Text, Modal, Pressable, ScrollView, Image, Platform } from 'react
 import * as ImagePicker from 'expo-image-picker';
 import { BlurView } from 'expo-blur';
 import { Entypo, Ionicons } from '@expo/vector-icons';
+import { useEffect } from 'react';
 
 const BackgroundImage = [
   require('../assets/backgrounds/aniversary.jpg'),
@@ -15,6 +16,9 @@ const BackgroundImage = [
   require('../assets/backgrounds/pickleball.jpg'),
   require('../assets/backgrounds/stadium.jpg'),
 ];
+
+
+
 
 // Group images into pairs (columns)
 const columns: any = [];
@@ -32,6 +36,13 @@ export default function ModalBackground({
   setModalVisible,
   onSelectBackground,
 }: ModalProps) {
+
+  useEffect(() => {
+    (async () => {
+      await ImagePicker.requestCameraPermissionsAsync();
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+    })();
+  }, []);
 
   // Pick image from camera or library
   const pickImage = async (fromCamera = false) => {
